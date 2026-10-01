@@ -153,12 +153,12 @@ SBO_CSVS = {
             BASE_DIR / "EGBO" / "LayeredBeam_EGBO_seed333.csv",
         ],
 
-    "EHVI": [
+    "qLogNEHVI": [
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed331.csv",
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed332.csv",
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed333.csv",
     ],
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed331.csv",
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed332.csv",
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed333.csv",
@@ -283,8 +283,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -301,7 +301,8 @@ for algo_name, (time_mean, time_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x, time_mean_plot, label=f"{algo_name}", color=color)
-    plt.fill_between(x, lower, upper, alpha=0.20, color=color)
+    # dont plot std given the limited number of random seeds
+    # plt.fill_between(x, lower, upper, alpha=0.20, color=color)
 
 plt.yscale("log")
 plt.xlabel("Evaluations")

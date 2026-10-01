@@ -56,8 +56,8 @@ marker_map = {
     "NSGA2": "s",
     "MOEAD": "P",
     "SMSEMOA": "D",
-    "EHVI": "^",
-    "ParEGO": "*",
+    "qLogNEHVI": "^",
+    "qLogNParEGO": "*",
     "MESMO": "v",
     "EGBO": "X",
 }

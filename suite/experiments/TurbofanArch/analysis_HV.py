@@ -172,7 +172,7 @@ def export_feasible_table(stats):
         row = {
             "Algorithm": algo,
             "Feasibility Ratio": f"{s['mean_rate']:.3f} ± {s['std_rate']:.3f}",
-            "Feasible Count": f"{s['mean_count']:.0f} ± {s['std_count']:.0f}"
+            "Feasible Count": f"{s['mean_count']:.3f} ± {s['std_count']:.3f}"
         }
 
         rows.append(row)
@@ -249,11 +249,11 @@ ALGO_CSVS = {
         BASE_DIR / "NSGA2" / "TurbofanArch_NSGA2_seed333.csv",
     ],
 
-    # "MOEAD": [
-    #     BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed331.csv",
-    #     BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed332.csv",
-    #     BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed333.csv",
-    # ],
+    "MOEAD": [
+        BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed331.csv",
+        BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed332.csv",
+        BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed333.csv",
+    ],
 
     "SMSEMOA": [
         BASE_DIR / "SMS_EMOA" / "TurbofanArch_SMSEMOA_seed331.csv",
@@ -261,13 +261,13 @@ ALGO_CSVS = {
         BASE_DIR / "SMS_EMOA" / "TurbofanArch_SMSEMOA_seed333.csv",
     ],
 
-    "EHVI": [
+    "qLogNEHVI": [
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed331.csv",
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed332.csv",
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed333.csv",
     ],
 
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed331.csv",
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed332.csv",
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed333.csv",
@@ -293,8 +293,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -322,7 +322,8 @@ for algo_name, (hv_mean, hv_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x_plot, hv_mean_plot, label=algo_name, color=color)
-    plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
+    # dont plot std because of limited 3 seeds
+    # plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
 
 
 plt.xlabel("Evaluations")
@@ -382,8 +383,8 @@ def export_hv_table(start_eval=55, end_eval=500, step=5):
 
     column_order = [
         "eval_axis",
-        "EHVI",
-        "ParEGO",
+        "qLogNEHVI",
+        "qLogNParEGO",
         "MESMO",
         "NSGA2",
         # "MOEAD",

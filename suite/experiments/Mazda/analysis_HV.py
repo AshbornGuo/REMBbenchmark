@@ -138,7 +138,7 @@ def export_feasible_table(stats):
         row = {
             "Algorithm": algo,
             "Feasibility Ratio": f"{s['mean_rate']:.3f} ± {s['std_rate']:.3f}",
-            "Feasible Count": f"{s['mean_count']:.0f} ± {s['std_count']:.0f}"
+            "Feasible Count": f"{s['mean_count']:.3f} ± {s['std_count']:.3f}"
         }
 
         rows.append(row)
@@ -225,13 +225,13 @@ ALGO_CSVS = {
         BASE_DIR / "SMS_EMOA" / "Mazda_SMSEMOA_seed333.csv",
     ],
 
-    # "EHVI": [
-    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed331.csv",
-    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed332.csv",
-    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed333.csv",
-    # ],
+    "qLogNEHVI": [
+        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed331.csv",
+        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed332.csv",
+        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed333.csv",
+    ],
 
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed331.csv",
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed332.csv",
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed333.csv",
@@ -259,8 +259,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -293,7 +293,8 @@ for algo_name, (hv_mean, hv_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x_plot, hv_mean_plot, label=algo_name, color=color)
-    plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
+    # dont plt std because of limited number of the random seeds
+    # plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
 
 plt.xlabel("Evaluations")
 plt.ylabel("Hypervolume")
@@ -357,8 +358,8 @@ def export_hv_table(start_eval=55, end_eval=500, step=5):
 
     column_order = [
         "eval_axis",
-        # "EHVI",
-        "ParEGO",
+        "qLogNEHVI",
+        "qLogNParEGO",
         # "MESMO",
         "NSGA2",
         # "MOEAD",

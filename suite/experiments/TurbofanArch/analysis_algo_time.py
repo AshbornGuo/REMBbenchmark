@@ -24,8 +24,22 @@ def read_moead_algorithm_time(path_seed: Path, path_gen: Path) -> np.ndarray:
 
     result = []
 
-    for g in range(1, len(gen_times)):
-        start = (g + 9) * 5
+    # for g in range(1, len(gen_times)):
+    #     # start = (g + 9) * 5
+    #     start = 45 + (g - 1) * 5
+    #     end = start + 5
+
+    #     block = eval_times[start:end]
+
+    #     if len(block) < 5:
+    #         break
+
+    #     eval_batch_time = np.mean(block)
+    #     algo_time = gen_times[g] - eval_batch_time
+
+    #     result.append(algo_time)
+    for g in range(2, len(gen_times)):
+        start = 45 + (g - 1) * 5
         end = start + 5
 
         block = eval_times[start:end]
@@ -176,12 +190,12 @@ SBO_CSVS = {
             BASE_DIR / "EGBO" / "TurbofanArch_EGBO_seed333.csv",
         ],
 
-    "EHVI": [
+    "qLogNEHVI": [
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed331.csv",
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed332.csv",
         BASE_DIR / "SBO_qLogNEHVI" / "TurbofanArch_qLogNEHVI_seed333.csv",
     ],
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed331.csv",
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed332.csv",
         BASE_DIR / "SBO_qLogNParEGO" / "TurbofanArch_qLogNParEGO_seed333.csv",
@@ -206,18 +220,18 @@ EA_CSVS = {
             BASE_DIR / "NSGA2" / "TurbofanArch_NSGA2_gentime333.csv",
         ],
     },
-    # "MOEAD": {
-    #     "seed": [
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed331.csv",
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed332.csv",
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed333.csv",
-    #     ],
-    #     "gen": [
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime331.csv",
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime332.csv",
-    #         BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime333.csv",
-    #     ],
-    # },
+    "MOEAD": {
+        "seed": [
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed331.csv",
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed332.csv",
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_seed333.csv",
+        ],
+        "gen": [
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime331.csv",
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime332.csv",
+            BASE_DIR / "MOEAD" / "TurbofanArch_MOEAD_gentime333.csv",
+        ],
+    },
     "SMSEMOA": {
         "seed": [
             BASE_DIR / "SMS_EMOA" / "TurbofanArch_SMSEMOA_seed331.csv",
@@ -304,8 +318,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -322,7 +336,8 @@ for algo_name, (time_mean, time_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x, time_mean_plot, label=f"{algo_name}", color=color)
-    plt.fill_between(x, lower, upper, alpha=0.20, color=color)
+    # dont plot std because of limited 3 seeds
+    # plt.fill_between(x, lower, upper, alpha=0.20, color=color)
 
 plt.yscale("log")
 plt.xlabel("Evaluations")
@@ -344,12 +359,12 @@ out_path.parent.mkdir(parents=True, exist_ok=True)
 plt.savefig(out_path, dpi=300, bbox_inches="tight")
 plt.close()
 
-print(f"Saved: {out_path}")
+# print(f"Saved: {out_path}")
 
 
-print("\n algo_names:", algo_names)
-print("\n algo_time_means:", algo_time_means)
-print("\n eval_axis:", eval_axis)
+# print("\n algo_names:", algo_names)
+# print("\n algo_time_means:", algo_time_means)
+# print("\n eval_axis:", eval_axis)
 
 
 

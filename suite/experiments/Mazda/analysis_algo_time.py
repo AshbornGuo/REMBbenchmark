@@ -153,12 +153,12 @@ SBO_CSVS = {
             BASE_DIR / "SBO_EGBO" / "Mazda_EGBO_seed333.csv",
         ],
 
-    # "EHVI": [
+    # "qLogNEHVI": [
     #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed331.csv",
     #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed332.csv",
     #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed333.csv",
     # ],
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed331.csv",
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed332.csv",
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed333.csv",
@@ -210,15 +210,15 @@ EA_CSVS = {
 
     # "RandomSearch": {
     #     "seed": [
-    #         BASE_DIR / "randomsearch" / "Mazda_RS_seed331.csv",
-    #         BASE_DIR / "randomsearch" / "Mazda_RS_seed332.csv",
-    #         BASE_DIR / "randomsearch" / "Mazda_RS_seed333.csv",
+    #         BASE_DIR / "random_search" / "Mazda_RS_seed331.csv",
+    #         BASE_DIR / "random_search" / "Mazda_RS_seed332.csv",
+    #         BASE_DIR / "random_search" / "Mazda_RS_seed333.csv",
     #     ],
 
     #     "time": [
-    #     BASE_DIR / "randomsearch" / "Mazda_RS_algtime_seed331.csv",
-    #     BASE_DIR / "randomsearch" / "Mazda_RS_algtime_seed332.csv",
-    #     BASE_DIR / "randomsearch" / "Mazda_RS_algtime_seed333.csv",
+    #     BASE_DIR / "random_search" / "Mazda_RS_algtime_seed331.csv",
+    #     BASE_DIR / "random_search" / "Mazda_RS_algtime_seed332.csv",
+    #     BASE_DIR / "random_search" / "Mazda_RS_algtime_seed333.csv",
 
     #     ],
     # },
@@ -282,8 +282,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -300,7 +300,7 @@ for algo_name, (time_mean, time_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x, time_mean_plot, label=f"{algo_name}", color=color)
-    plt.fill_between(x, lower, upper, alpha=0.20, color=color)
+    # plt.fill_between(x, lower, upper, alpha=0.20, color=color)
 
 plt.yscale("log")
 plt.xlabel("Evaluations")

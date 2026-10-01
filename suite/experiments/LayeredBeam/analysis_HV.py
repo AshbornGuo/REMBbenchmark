@@ -149,13 +149,13 @@ ALGO_CSVS = {
         BASE_DIR / "SMSEMOA" / "LayeredBeam_SMSEMOA_seed333.csv",
     ],
 
-    "EHVI": [
+    "qLogNEHVI": [
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed331.csv",
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed332.csv",
         BASE_DIR / "qLogNEHVI" / "LayeredBeam_qLogNEHVI_seed333.csv",
     ],
 
-    "ParEGO": [
+    "qLogNParEGO": [
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed331.csv",
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed332.csv",
         BASE_DIR / "qLogNParEGO" / "LayeredBeam_qLogNParEGO_seed333.csv",
@@ -184,8 +184,8 @@ color_map = {
     "NSGA2": "#1f77b4",         
     "MOEAD": "#9467bd",         
     "SMSEMOA": "#d62728",       
-    "EHVI": "#2ca02c",          
-    "ParEGO": "#ff7f0e",        
+    "qLogNEHVI": "#2ca02c",          
+    "qLogNParEGO": "#ff7f0e",        
     "MESMO": "#17becf",         
 }
 
@@ -217,7 +217,8 @@ for algo_name, (hv_mean, hv_std) in stats.items():
     color = color_map.get(algo_name, None)
 
     plt.plot(x_plot, hv_mean_plot, label=algo_name, color=color)
-    plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
+    # dont plot std given the limited number of random seeds
+    # plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
 
 
 
@@ -245,7 +246,7 @@ plt.close()
 
 def export_hv_table(start_eval=55, end_eval=500, step=5):
     if start_eval % step != 0 or end_eval % step != 0:
-        raise ValueError("start_eval 和 end_eval 必须能被 step 整除。")
+        raise ValueError("start_eval and end_eval must be divisible by step.")
 
     eval_axis = np.arange(start_eval, end_eval + 1, step)
     result = {"eval_axis": eval_axis}
@@ -282,8 +283,8 @@ def export_hv_table(start_eval=55, end_eval=500, step=5):
 
     column_order = [
         "eval_axis",
-        "EHVI",
-        "ParEGO",
+        "qLogNEHVI",
+        "qLogNParEGO",
         "MESMO",
         "NSGA2",
         "MOEAD",
