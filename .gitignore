@@ -9,5 +9,10 @@ __pycache__/
 # Conda / venv
 .venv/
 
+problem_sets/mazda_interface/Info_Mazda_CdMOBP.xlsx
+problem_sets/mazda_interface/Info_test.xlsx
+problem_sets/mazda_interface/mazda_mop.exe
+
+
 
 
