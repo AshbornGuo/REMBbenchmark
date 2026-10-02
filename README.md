@@ -27,6 +27,14 @@ REMBbenchmark is an open-source benchmark suite for evaluating and comparing opt
 
 - experement results, which benchmark above algorithms on these three bechmark problems.  
 
+## Related academic work
+
+This repository accompanies the extended abstract:
+
+> **Benchmarking Surrogate-Based Optimisation, Evolutionary, and Hybrid Algorithms on Real-Life Expensive Multi-Objective Black-Box Problems**  
+> Jialiang Guo  
+> Accepted as a poster at **BNAIC/BeNeLearn 2026**.  
+> [View the submission on OpenReview](https://openreview.net/forum?id=H6pXsxVB69)
 
 ## Repository structure
 
