@@ -34,7 +34,8 @@ This repository accompanies the extended abstract:
 > **Benchmarking Surrogate-Based Optimisation, Evolutionary, and Hybrid Algorithms on Real-Life Expensive Multi-Objective Black-Box Problems**  
 > Jialiang Guo  
 > [Accepted at **BNAIC/BeNeLearn 2026**](https://openreview.net/profile?id=%7EJialiang_Guo6).
-> [selected for a presentation at the Bayesian Optimisation Workshop](https://sasan-amini.github.io/BOW26/)
+
+> [Selected for a presentation at the **Bayesian Optimisation Workshop**](https://sasan-amini.github.io/BOW26/).
 
 ## Repository structure
 
