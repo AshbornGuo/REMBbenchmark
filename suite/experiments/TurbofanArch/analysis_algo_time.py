@@ -323,6 +323,17 @@ color_map = {
     "MESMO": "#17becf",         
 }
 
+marker_map = {
+    "RandomSearch": "o",
+    "NSGA2": "s",
+    "MOEAD": "P",
+    "SMSEMOA": "D",
+    "qLogNEHVI": "^",
+    "qLogNParEGO": "*",
+    "MESMO": "v",
+    "EGBO": "X",
+}
+
 for algo_name, (time_mean, time_std) in stats.items():
     T = len(time_mean)
     x = np.arange(start_row, start_row + T * sample_step, sample_step)
@@ -335,11 +346,20 @@ for algo_name, (time_mean, time_std) in stats.items():
 
     color = color_map.get(algo_name, None)
 
-    plt.plot(x, time_mean_plot, label=f"{algo_name}", color=color)
-    # dont plot std because of limited 3 seeds
-    # plt.fill_between(x, lower, upper, alpha=0.20, color=color)
+    # plt.plot(x, time_mean_plot, label=f"{algo_name}", color=color)
+    plt.plot(
+    x,
+    time_mean_plot,
+    label=algo_name,
+    color=color,
+    marker=marker_map.get(algo_name, "o"),
+    markersize=4,
+    markevery=10,  # one mark every 10 points 
+    )
+    plt.fill_between(x, lower, upper, alpha=0.20, color=color)
 
 plt.yscale("log")
+plt.ylim(bottom=1e-3)
 plt.xlabel("Evaluations")
 plt.ylabel("Algorithm Runtime (s)")
 # plt.title("Algorithm Time Comparison")

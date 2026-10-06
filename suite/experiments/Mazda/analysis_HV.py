@@ -225,11 +225,11 @@ ALGO_CSVS = {
         BASE_DIR / "SMS_EMOA" / "Mazda_SMSEMOA_seed333.csv",
     ],
 
-    "qLogNEHVI": [
-        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed331.csv",
-        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed332.csv",
-        BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed333.csv",
-    ],
+    # "qLogNEHVI": [
+    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed331.csv",
+    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed332.csv",
+    #     BASE_DIR / "SBO_EHVI" / "Mazda_qLogNEHVI_seed333.csv",
+    # ],
 
     "qLogNParEGO": [
         BASE_DIR / "qLogNParEGO" / "Mazda_qLogNParEGO_seed331.csv",
@@ -264,6 +264,17 @@ color_map = {
     "MESMO": "#17becf",         
 }
 
+marker_map = {
+    "RandomSearch": "o",
+    "NSGA2": "s",
+    "MOEAD": "P",
+    "SMSEMOA": "D",
+    "qLogNEHVI": "^",
+    "qLogNParEGO": "*",
+    "MESMO": "v",
+    "EGBO": "X",
+}
+
 
 for algo_name, paths in ALGO_CSVS.items():
 
@@ -292,9 +303,17 @@ for algo_name, (hv_mean, hv_std) in stats.items():
 
     color = color_map.get(algo_name, None)
 
-    plt.plot(x_plot, hv_mean_plot, label=algo_name, color=color)
-    # dont plt std because of limited number of the random seeds
-    # plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
+    # plt.plot(x_plot, hv_mean_plot, label=algo_name, color=color)
+    plt.plot(
+    x_plot,
+    hv_mean_plot,
+    label=algo_name,
+    color=color,
+    marker=marker_map.get(algo_name, "o"),
+    markersize=4,
+    markevery=30,  # one mark every 30 points 
+    )
+    plt.fill_between(x_plot, hv_lower_plot, hv_upper_plot, alpha=0.20, color=color)
 
 plt.xlabel("Evaluations")
 plt.ylabel("Hypervolume")
